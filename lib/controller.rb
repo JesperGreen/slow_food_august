@@ -12,8 +12,7 @@ class SlowFood < Sinatra::Base
 
   #Create a test User
   if User.count == 0
-   @user = User.create(username: "user")
-   @user.password = "user"
+   @user = User.create(username: "admin", password: "admin")
    @user.save
   end
 
@@ -56,10 +55,11 @@ class SlowFood < Sinatra::Base
   post '/auth/login' do
     env['warden'].authenticate!
     flash[:success] = "Successfully logged in #{current_user.username}"
-    if current_user.admin = true
-      redirect '/protected'
-
-    elsif session[:return_to].nil?
+    # if current_user.admin = true
+    #   redirect '/protected'
+    #
+    # els
+    if session[:return_to].nil?
       redirect '/'
 
     else
